@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/edith/.dotnet/store/|arch|/|tfm|",
+      "/Users/edith/.nuget/packages"
+    ]
+  }
+}

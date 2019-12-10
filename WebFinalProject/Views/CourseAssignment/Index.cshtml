@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebFinalProject.Models.CourseAssignment>
+@inject SignInManager<IdentityUser> signInManager;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>CourseAssigments</h1>
+
+
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Instructor First Name</th>
+            <th>Instructor Last Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var items in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(itemsModel => items.Course.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(itemsModel => items.Instructor.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(itemsModel => items.Instructor.LastName)
+                </td>
+
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" , asp-route-id="@items.CourseID || @items.InstructorID">Edit</a> |
+                        <a asp-action="Details" , asp-route-id="@items.CourseID || @items.InstructorID">Details</a> | 
+                        <a asp-action="Delete" , asp-route-id="@items.CourseID || @items.InstructorID">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" , asp-route-id="@items.CourseID || @items.InstructorID">Details</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
